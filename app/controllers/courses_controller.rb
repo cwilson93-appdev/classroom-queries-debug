@@ -8,10 +8,8 @@ class CoursesController < ApplicationController
 
   def show
     the_id = params.fetch("path_id")
-
-    matching_courses = Course.where({ :id => the_id })
-
-    @the_course = matching_courses.at(0)
+    @the_course = Course.where({ :id => the_id }).at(0)
+    @roster = Course.where({ :student_id => @the_student.id })
 
     render({ :template => "courses/show.html.erb" })
   end
